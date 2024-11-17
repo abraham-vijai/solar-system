@@ -41,20 +41,26 @@ function createStarfield(numStars) {
 }
 
 
-function createCelestialBody(radius, txtr, distanceFromOrigin){
+function createCelestialBody(radius, txtr, distanceFromOrigin) {
   // Disable wireframe
   noStroke();
-  
+
   // Load the texture
   texture(txtr);
 
-  // Move the object
   push();
-  translate(distanceFromOrigin, 0, 0)
-  sphere(radius, 20,20);
+
+  // Rotate around its own axis and around the distance
+  rotate(frameCount * .02);
+
+  // Translate to its position
+  translate(distanceFromOrigin, 0)
+  
+  // Draw the sphere
+  sphere(radius, 20, 20);
+
   pop();
 }
-
 function preload(){
   sunTexture = loadImage('./assets/sun.jpg')
 }
