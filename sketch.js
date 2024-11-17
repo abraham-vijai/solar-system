@@ -1,10 +1,10 @@
 const NOISE_SEED = 100;
-const RANDOM_SEED = 100;
-const STAR_COUNT = 100;
 
 let sunTexture, earthTexture, moonTexure;
-let starPositions = []; 
+let starPositions = [];
 let ui;
+let starCount = 100;
+let textBoxValue;
 
 function setup() {
   createCanvas(700, 700, WEBGL);
@@ -12,17 +12,16 @@ function setup() {
 
   // Set seeds
   noiseSeed(NOISE_SEED);
-  randomSeed(RANDOM_SEED);
 }
 
 function draw() {
   background('black');
-  
+
   let earth = new SpaceObject(10, 15, earthTexture, 200, true, moonTexure);
   let sun = new SpaceObject(30, 15, sunTexture, 0, false);
-  
+
   // Create the starfield
-  SpaceObject.createStarfield(STAR_COUNT)
+  SpaceObject.createStarfield(starCount, starPositions)
 
   // Create the sun
   sun.createSpaceObject();
@@ -34,21 +33,24 @@ function draw() {
 function setupUI(params) {
   ui = new UI();
 
-  let xOffset = width+10; // Starting x position
+  let xOffset = width + 10; // Starting x position
   let yOffset = 0;  // Starting y position
   let ySpacing = 20;
   let gap = 40;  // Vertical space between rows
 
+  // Number of Stars
   ui.createLabel('Number of Stars:', xOffset, yOffset)
   yOffset += ySpacing;
-  ui.createTextBox('', xOffset, yOffset);
-  ui.createButton('Update Stars', xOffset+170,yOffset)
+  textBoxValue = ui.createTextBox('', xOffset, yOffset);
+  ui.createButton('Update Stars', xOffset + 170, yOffset, updateStarCount);
 
+  // Earth Distance From Sun
   yOffset += gap;
   ui.createLabel('Earth Distance From Sun:', xOffset, yOffset);
   yOffset += ySpacing;
   ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
 
+  // Earth Rotation Speed
   yOffset += gap;
   ui.createLabel('Earth Rotation Speed:', xOffset, yOffset);
   yOffset += ySpacing;
@@ -78,7 +80,7 @@ function setupUI(params) {
   ui.createLabel('Custom Planet Rotation Speed:', xOffset, yOffset);
   yOffset += ySpacing;
   ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
-  
+
   yOffset += gap;
   ui.createLabel('Custom Planet Distance From Sun:', xOffset, yOffset);
   yOffset += ySpacing;
@@ -91,7 +93,7 @@ function setupUI(params) {
 
   yOffset += gap;
   ui.createLabel('Has Moon:', xOffset, yOffset);
-  ui.createCheckbox('', false, xOffset+170, yOffset)
+  ui.createCheckbox('', false, xOffset + 170, yOffset)
 
   yOffset += gap;
   ui.createLabel('Custom Moon Distance From Sun:', xOffset, yOffset);
@@ -109,11 +111,16 @@ function setupUI(params) {
   ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
 
   yOffset += gap;
-  ui.createButton('Add Planet',xOffset,yOffset)
-  ui.createButton('Remove Last Planet',xOffset+120,yOffset)
+  ui.createButton('Add Planet', xOffset, yOffset)
+  ui.createButton('Remove Last Planet', xOffset + 120, yOffset)
   yOffset += ySpacing
-  ui.createButton('Pause/Resume',xOffset,yOffset)
-  ui.createButton('Reset',xOffset+120,yOffset)
+  ui.createButton('Pause/Resume', xOffset, yOffset)
+  ui.createButton('Reset', xOffset + 120, yOffset)
+}
+
+function updateStarCount() {
+  starPositions = [];
+  starCount = textBoxValue.value();
 }
 
 function preload() {
