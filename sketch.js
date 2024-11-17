@@ -20,35 +20,15 @@ function draw() {
   
   let earth = new CelestialObject(10, 15, earthTexture, 200, true, moonTexure);
   let sun = new CelestialObject(30, 15, sunTexture, 0, false);
-
+  
   // Create the starfield
-  createStarfield(STAR_COUNT)
+  CelestialObject.createStarfield(STAR_COUNT)
 
   // Create the sun
   sun.createCelestialObject();
 
   // Create the earth
   earth.createCelestialObject();
-}
-
-function createStarfield(numStars) {
-  // Generate star positions once
-  if (starPositions.length == 0) {
-    for (let i = 0; i < numStars; i++) {
-      starPositions.push({
-        x: random(-width/2, width/2),
-        y: random(-height/2, height/2),
-      });
-    }
-  }
-
-  // Draw the stars
-  strokeWeight(3);
-  stroke('white');
-  for (let star of starPositions) {
-    point(star.x, star.y);
-  }
-
 }
 
 function setupUI(params) {

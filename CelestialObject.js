@@ -37,6 +37,26 @@ class CelestialObject {
         pop();
     }
 
+    static createStarfield(numStars) {
+        // Generate star positions once
+        if (starPositions.length == 0) {
+          for (let i = 0; i < numStars; i++) {
+            starPositions.push({
+              x: random(-width/2, width/2),
+              y: random(-height/2, height/2),
+            });
+          }
+        }
+      
+        // Draw the stars
+        strokeWeight(3);
+        stroke('white');
+        for (let star of starPositions) {
+          point(star.x, star.y);
+        }
+      
+    }
+
     createMoon() {
         // Disable wireframe
         noStroke();
