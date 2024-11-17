@@ -18,17 +18,17 @@ function setup() {
 function draw() {
   background('black');
   
-  let earth = new CelestialObject(10, 15, earthTexture, 200, true, moonTexure);
-  let sun = new CelestialObject(30, 15, sunTexture, 0, false);
+  let earth = new SpaceObject(10, 15, earthTexture, 200, true, moonTexure);
+  let sun = new SpaceObject(30, 15, sunTexture, 0, false);
   
   // Create the starfield
-  CelestialObject.createStarfield(STAR_COUNT)
+  SpaceObject.createStarfield(STAR_COUNT)
 
   // Create the sun
-  sun.createCelestialObject();
+  sun.createSpaceObject();
 
   // Create the earth
-  earth.createCelestialObject();
+  earth.createSpaceObject();
 }
 
 function setupUI(params) {

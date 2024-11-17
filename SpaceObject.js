@@ -1,4 +1,4 @@
-class CelestialObject {
+class SpaceObject {
     constructor(objectRadius, objectSubdivision, objectTexture, objectDistance, objectHasMoons = false, moonTexture = null) {
         this.radius = objectRadius;
         this.subdivision = objectSubdivision;
@@ -8,7 +8,7 @@ class CelestialObject {
         this.moonTexture = moonTexture; 
     }
 
-    createCelestialObject() {
+    createSpaceObject() {
         // Disable wireframe
         noStroke();
 
