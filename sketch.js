@@ -2,7 +2,7 @@ const NOISE_SEED = 100;
 const RANDOM_SEED = 100;
 const STAR_COUNT = 100;
 
-let sunTexture;
+let sunTexture, earthTexture;
 let starPositions = [];
 
 function setup() {
@@ -17,6 +17,9 @@ function draw() {
 
   // Create the sun
   createCelestialBody(100,sunTexture,0);
+
+  // Create the earth
+  createCelestialBody(10, earthTexture, 200);
 
 }
 
@@ -63,5 +66,7 @@ function createCelestialBody(radius, txtr, distanceFromOrigin) {
 }
 function preload(){
   sunTexture = loadImage('./assets/sun.jpg')
+  earthTexture = loadImage('./assets/earth_daymap.jpg');
+
 }
 
