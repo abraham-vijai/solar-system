@@ -1,6 +1,9 @@
 const NOISE_SEED = 100;
 const RANDOM_SEED = 100;
+const STAR_COUNT = 100;
+
 let sunTexture;
+let starPositions = [];
 
 function setup() {
   createCanvas(700, 700, WEBGL);
@@ -10,7 +13,7 @@ function draw() {
   background('black');
 
   // Create the starfield
-  createStarfield(1000)
+  createStarfield(STAR_COUNT)
 
   // Create the sun
   createCelestialBody(100,sunTexture,0);
@@ -18,15 +21,25 @@ function draw() {
 }
 
 function createStarfield(numStars) {
-  noLoop();
-  
-  for (let i = 0; i < numStars; i++) {
-    // Create starfield
-    strokeWeight(3);
-    stroke('white')
-    point(random(-width,width),random(-height,height))
+
+  // Generate star positions once
+  if (starPositions.length === 0) {
+    for (let i = 0; i < numStars; i++) {
+      starPositions.push({
+        x: random(-width, width),
+        y: random(-height, height),
+      });
+    }
+  }
+
+  // Draw the stars
+  strokeWeight(3);
+  stroke('white');
+  for (let star of starPositions) {
+    point(star.x, star.y);
   }
 }
+
 
 function createCelestialBody(radius, txtr, distanceFromOrigin){
   // Disable wireframe
