@@ -2,11 +2,11 @@ const NOISE_SEED = 100;
 const RANDOM_SEED = 100;
 const STAR_COUNT = 100;
 
-let sunTexture, earthTexture;
-let starPositions = [];
+let sunTexture, earthTexture, moonTexure;
+let starPositions = []; // Array to store star positions
 
 function setup() {
-  createCanvas(700, 700, WEBGL);
+  createCanvas(windowWidth, windowHeight, WEBGL);
 }
 
 function draw() {
@@ -16,11 +16,10 @@ function draw() {
   createStarfield(STAR_COUNT)
 
   // Create the sun
-  createCelestialBody(100,sunTexture,0);
+  createCelestialBody(30, sunTexture, 0, false);
 
   // Create the earth
-  createCelestialBody(10, earthTexture, 200);
-
+  createCelestialBody(10, earthTexture, 200, true);
 }
 
 function createStarfield(numStars) {
@@ -43,8 +42,7 @@ function createStarfield(numStars) {
   }
 }
 
-
-function createCelestialBody(radius, txtr, distanceFromOrigin) {
+function createCelestialBody(radius, txtr, distanceFromOrigin, hasMoon) {
   // Disable wireframe
   noStroke();
 
@@ -62,11 +60,33 @@ function createCelestialBody(radius, txtr, distanceFromOrigin) {
   // Draw the sphere
   sphere(radius, 20, 20);
 
+  if(hasMoon) {
+    // Disable wireframe
+    noStroke();
+
+    // Load the texture
+    texture(moonTexure);
+
+    // Rotate the object around its planet
+    rotate(frameCount *.1);
+    
+    push();
+
+    // Move the object
+    translate(30, 0);
+    
+    // Draw sphere
+    sphere(5, 20, 20);
+
+    pop();
+  }
+
   pop();
 }
-function preload(){
+
+function preload() {
   sunTexture = loadImage('./assets/sun.jpg')
   earthTexture = loadImage('./assets/earth_daymap.jpg');
-
+  moonTexure = loadImage('./assets/moon.jpg');
 }
 
