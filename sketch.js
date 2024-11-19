@@ -4,7 +4,11 @@ let sunTexture, earthTexture, moonTexure;
 let starPositions = [];
 let ui;
 let starCount = 100;
-let textBoxValue;
+
+let UI_starCount;
+let UI_earthSunDistance;
+let UI_earthRotationSpeed;
+let UI_moonSunDistance
 
 function setup() {
   createCanvas(700, 700, WEBGL);
@@ -17,9 +21,9 @@ function setup() {
 function draw() {
   background('black');
 
-  let earth = new SpaceObject(10, 15, earthTexture, 200, true, moonTexure);
-  let sun = new SpaceObject(30, 15, sunTexture, 0, false);
-
+  let earth = new SpaceObject(10, UI_earthRotationSpeed.value(), 15, earthTexture, UI_earthSunDistance.value(), true, moonTexure);
+  let sun = new SpaceObject(30, .05, 15, sunTexture, 0, false);
+  
   // Create the starfield
   SpaceObject.createStarfield(starCount, starPositions)
 
@@ -28,9 +32,10 @@ function draw() {
 
   // Create the earth
   earth.createSpaceObject();
+
 }
 
-function setupUI(params) {
+function setupUI() {
   ui = new UI();
 
   let xOffset = width + 10; // Starting x position
@@ -41,20 +46,20 @@ function setupUI(params) {
   // Number of Stars
   ui.createLabel('Number of Stars:', xOffset, yOffset)
   yOffset += ySpacing;
-  textBoxValue = ui.createTextBox('', xOffset, yOffset);
+  UI_starCount = ui.createTextBox('100', xOffset, yOffset);
   ui.createButton('Update Stars', xOffset + 170, yOffset, updateStarCount);
 
   // Earth Distance From Sun
   yOffset += gap;
   ui.createLabel('Earth Distance From Sun:', xOffset, yOffset);
   yOffset += ySpacing;
-  ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
+  UI_earthSunDistance = ui.createSlider(0, width, 50, 5, xOffset, yOffset);
 
   // Earth Rotation Speed
   yOffset += gap;
   ui.createLabel('Earth Rotation Speed:', xOffset, yOffset);
   yOffset += ySpacing;
-  ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
+  UI_earthRotationSpeed = ui.createSlider(0, 1, .05, .01, xOffset, yOffset);
 
   yOffset += gap;
   ui.createLabel('Moon Distance From Sun:', xOffset, yOffset);
@@ -120,7 +125,7 @@ function setupUI(params) {
 
 function updateStarCount() {
   starPositions = [];
-  starCount = textBoxValue.value();
+  starCount = UI_starCount.value();
 }
 
 function preload() {
