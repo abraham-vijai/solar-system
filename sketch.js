@@ -8,7 +8,8 @@ let starCount = 100;
 let UI_starCount;
 let UI_earthSunDistance;
 let UI_earthRotationSpeed;
-let UI_moonSunDistance
+let UI_moonSunDistance;
+let UI_moonRotationSpeed;
 
 function setup() {
   createCanvas(700, 700, WEBGL);
@@ -28,10 +29,15 @@ function draw() {
   SpaceObject.createStarfield(starCount, starPositions)
 
   // Create the sun
+  push();
   sun.createSpaceObject();
-
+  pop();
+  
   // Create the earth
+  push();
   earth.createSpaceObject();
+  earth.addMoon(40,UI_moonSunDistance.value(), UI_moonRotationSpeed.value(), moonTexure);
+  pop();
 
 }
 
@@ -59,17 +65,18 @@ function setupUI() {
   yOffset += gap;
   ui.createLabel('Earth Rotation Speed:', xOffset, yOffset);
   yOffset += ySpacing;
-  UI_earthRotationSpeed = ui.createSlider(0, 1, .05, .01, xOffset, yOffset);
+  UI_earthRotationSpeed = ui.createSlider(0, 1, .05, .001, xOffset, yOffset);
 
   yOffset += gap;
   ui.createLabel('Moon Distance From Sun:', xOffset, yOffset);
   yOffset += ySpacing;
-  ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
+  UI_moonSunDistance = ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
 
+  // Moon Rotation Speed
   yOffset += gap;
   ui.createLabel('Moon Rotation Speed:', xOffset, yOffset);
   yOffset += ySpacing;
-  ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
+  UI_moonRotationSpeed = ui.createSlider(0, 1, .05, .01, xOffset, yOffset);
 
   yOffset += gap;
   ui.createLabel('Custom Planet Size:', xOffset, yOffset);
