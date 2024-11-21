@@ -94,40 +94,47 @@ function setupUI() {
   yOffset += ySpacing;
   UI_moonRotationSpeed = ui.createSlider(0, 1, .02, .01, xOffset, yOffset);
 
+  // Custom Planet Size:
   yOffset += gap;
   ui.createLabel('Custom Planet Size:', xOffset, yOffset);
   yOffset += ySpacing;
-  UI_planetSize = ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
+  UI_planetSize = ui.createSlider(0, 100, 20, 1, xOffset, yOffset);
 
+  // Custom Planet Color
   yOffset += gap;
   ui.createLabel('Custom Planet Color:', xOffset, yOffset);
   yOffset += ySpacing;
   UI_planetColor = ui.createColorPicker('yellow', xOffset, yOffset);
 
+  // Custom Planet Rotation Speed
   yOffset += gap;
   ui.createLabel('Custom Planet Rotation Speed:', xOffset, yOffset);
   yOffset += ySpacing;
-  UI_planetRotationSpeed = ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
+  UI_planetRotationSpeed = ui.createSlider(0, 1, .02, .001, xOffset, yOffset);
 
+  // Custom Planet Distance From Sun
   yOffset += gap;
   ui.createLabel('Custom Planet Distance From Sun:', xOffset, yOffset);
   yOffset += ySpacing;
-  UI_planetSunDistance = ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
+  UI_planetSunDistance = ui.createSlider(0, width, 200, 5, xOffset, yOffset);
 
   yOffset += gap;
   ui.createLabel('Has Moon:', xOffset, yOffset);
   UI_planetHasMoon = ui.createCheckbox('', false, xOffset + 170, yOffset)
 
+  // Custom Moon Distance From Planet
   yOffset += gap;
   ui.createLabel('Custom Moon Distance From Planet:', xOffset, yOffset);
   yOffset += ySpacing;
   UI_planetMoonDistance = ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
 
+  // Custom Moon Rotation Speed
   yOffset += gap;
   ui.createLabel('Custom Moon Rotation Speed:', xOffset, yOffset);
   yOffset += ySpacing;
   UI_planetMoonRotationSpeed = ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
 
+  // Custom Moon Size
   yOffset += gap;
   ui.createLabel('Custom Moon Size:', xOffset, yOffset);
   yOffset += ySpacing;
