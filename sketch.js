@@ -52,6 +52,21 @@ function draw() {
   for(let planet of planetArray){
     push();
     planet.createSpaceObject();
+    
+    // Convert to RGB
+    let hexColor = UI_planetColor.value(); // Get the color from the color picker
+    let c = color(hexColor); // Convert hex to a p5.js color object
+    let rgbColor = [red(c), green(c), blue(c)]; // Extract RGB values as an array
+    
+    // Add moon if the checkbox is checked       
+    if (UI_planetHasMoon.checked()) {
+      planet.createMoon(
+        UI_planetMoonSize.value(),
+        UI_planetMoonDistance.value(),
+        UI_planetMoonRotationSpeed.value(),
+        null
+      );
+    }
     pop();
   }
 }
@@ -156,8 +171,6 @@ function addPlanet() {
   let c = color(hexColor); // Convert hex to a p5.js color object
   let rgbColor = [red(c), green(c), blue(c)]; // Extract RGB values as an array
 
-  push();
-
   // Store the new planet in the array
   planetArray.push(newPlanet = new SpaceObject(
     UI_planetSize.value(),
@@ -168,17 +181,16 @@ function addPlanet() {
     rgbColor
   )); 
 
-  // Add moon if the checkbox is checked
-  if (UI_planetHasMoon.checked()) {
-    newPlanet.createMoon(
-      UI_planetMoonSize.value(),
-      UI_planetMoonDistance.value(),
-      UI_planetMoonRotationSpeed.value(),
-      rgbColor
-    );
-  }
+  // // Add moon if the checkbox is checked
+  // if (UI_planetHasMoon.checked()) {
+  //   newPlanet.createMoon(
+  //     UI_planetMoonSize.value(),
+  //     UI_planetMoonDistance.value(),
+  //     UI_planetMoonRotationSpeed.value(),
+  //     rgbColor
+  //   );
+  // }
 
-  pop();
 }
 
 function removeLastPlanet() {
