@@ -144,12 +144,18 @@ function setupUI() {
 function addPlanet() {
   let newPlanet;
 
+  // Convert to RGB
+  let hexColor = UI_planetColor.value(); // Get the color from the color picker
+  let c = color(hexColor); // Convert hex to a p5.js color object
+  let rgbColor = [red(c), green(c), blue(c)]; // Extract RGB values as an array
+
   planetArray.push(newPlanet = new SpaceObject(
     UI_planetSize.value(),
     UI_planetRotationSpeed.value(),
     15,
-    moonTexure,
-    UI_planetSunDistance.value()
+    null,
+    UI_planetSunDistance.value(),
+    rgbColor
   )); // Store the new planet in the array
 }
 

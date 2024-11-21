@@ -1,18 +1,27 @@
 class SpaceObject {
-  constructor(objectRadius, objectRotationSpeed, objectSubdivision, objectTexture, objectDistance) {
+  constructor(objectRadius, objectRotationSpeed, objectSubdivision, objectTexture, objectDistance, objectColor = null) {
     this.radius = objectRadius;
     this.subdivision = objectSubdivision;
     this.texture = objectTexture;
     this.distance = objectDistance;
     this.rotationSpeed = objectRotationSpeed;
+    this.color = objectColor;
   }
 
   createSpaceObject() {
     // Disable wireframe
     noStroke();
+     
+    if(this.texture == null) {
+      // Add the color
+      ambientLight(this.color[0], this.color[1], this.color[2]);
+      ambientMaterial(255)
+    }
+    else {
+      // Load the texture for the celestial object
+      texture(this.texture);
+    }
 
-    // Load the texture for the celestial object
-    texture(this.texture);
 
     // Rotate around the sun
     rotate(frameCount * this.rotationSpeed);
