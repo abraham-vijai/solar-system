@@ -45,7 +45,7 @@ function draw() {
   // Create the earth and moon
   push();
   earth.createSpaceObject();
-  earth.addMoon(40,UI_moonSunDistance.value(), UI_moonRotationSpeed.value(), moonTexure);
+  earth.createMoon(5, 40,UI_moonSunDistance.value(), UI_moonRotationSpeed.value(), moonTexure);
   pop();
 
   // Display the planets in the array
@@ -116,7 +116,7 @@ function setupUI() {
   yOffset += gap;
   ui.createLabel('Custom Planet Distance From Sun:', xOffset, yOffset);
   yOffset += ySpacing;
-  UI_planetSunDistance = ui.createSlider(0, width, 200, 5, xOffset, yOffset);
+  UI_planetSunDistance = ui.createSlider(0, width, 300, 5, xOffset, yOffset);
 
   yOffset += gap;
   ui.createLabel('Has Moon:', xOffset, yOffset);
@@ -126,19 +126,19 @@ function setupUI() {
   yOffset += gap;
   ui.createLabel('Custom Moon Distance From Planet:', xOffset, yOffset);
   yOffset += ySpacing;
-  UI_planetMoonDistance = ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
+  UI_planetMoonDistance = ui.createSlider(0, 50, 30, 1, xOffset, yOffset);
 
   // Custom Moon Rotation Speed
   yOffset += gap;
   ui.createLabel('Custom Moon Rotation Speed:', xOffset, yOffset);
   yOffset += ySpacing;
-  UI_planetMoonRotationSpeed = ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
+  UI_planetMoonRotationSpeed = ui.createSlider(0, 1, .02, .005, xOffset, yOffset);
 
   // Custom Moon Size
   yOffset += gap;
   ui.createLabel('Custom Moon Size:', xOffset, yOffset);
   yOffset += ySpacing;
-  UI_planetMoonSize = ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
+  UI_planetMoonSize = ui.createSlider(0, 100, 10, 5, xOffset, yOffset);
 
   yOffset += gap;
   ui.createButton('Add Planet', xOffset, yOffset, addPlanet);
@@ -156,6 +156,8 @@ function addPlanet() {
   let c = color(hexColor); // Convert hex to a p5.js color object
   let rgbColor = [red(c), green(c), blue(c)]; // Extract RGB values as an array
 
+  push();
+
   planetArray.push(newPlanet = new SpaceObject(
     UI_planetSize.value(),
     UI_planetRotationSpeed.value(),
@@ -164,6 +166,18 @@ function addPlanet() {
     UI_planetSunDistance.value(),
     rgbColor
   )); // Store the new planet in the array
+
+  // Add moon if the checkbox is checked
+  if (UI_planetHasMoon.checked()) {
+    newPlanet.createMoon(
+      UI_planetMoonSize.value(),
+      UI_planetMoonDistance.value(),
+      UI_planetMoonRotationSpeed.value(),
+      rgbColor
+    );
+  }
+
+  pop();
 }
 
 function removeLastPlanet() {
