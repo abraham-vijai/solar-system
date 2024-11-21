@@ -153,6 +153,12 @@ function addPlanet() {
   )); // Store the new planet in the array
 }
 
+function removeLastPlanet() {
+  if (planetArray.length > 0) {
+    planetArray.pop(); // Remove the last planet in the array
+  }
+}
+
 function updateStarCount() {
   starPositions = [];
   starCount = UI_starCount.value();
