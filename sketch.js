@@ -2,6 +2,7 @@ const NOISE_SEED = 100;
 
 let sunTexture, earthTexture, moonTexure;
 let starPositions = [];
+let planetArray = [];
 let ui;
 let starCount = 100;
 
@@ -10,6 +11,14 @@ let UI_earthSunDistance;
 let UI_earthRotationSpeed;
 let UI_moonSunDistance;
 let UI_moonRotationSpeed;
+let UI_planetRotationSpeed;
+let UI_planetSize;
+let UI_planetSunDistance;
+let UI_planetColor;
+let UI_planetHasMoon;
+let UI_planetMoonRotationSpeed;
+let UI_planetMoonSize;
+let UI_planetMoonDistance;
 
 function setup() {
   createCanvas(700, 700, WEBGL);
@@ -59,75 +68,71 @@ function setupUI() {
   yOffset += gap;
   ui.createLabel('Earth Distance From Sun:', xOffset, yOffset);
   yOffset += ySpacing;
-  UI_earthSunDistance = ui.createSlider(0, width, 50, 5, xOffset, yOffset);
+  UI_earthSunDistance = ui.createSlider(0, width, 200, 5, xOffset, yOffset);
 
   // Earth Rotation Speed
   yOffset += gap;
   ui.createLabel('Earth Rotation Speed:', xOffset, yOffset);
   yOffset += ySpacing;
-  UI_earthRotationSpeed = ui.createSlider(0, 1, .05, .001, xOffset, yOffset);
+  UI_earthRotationSpeed = ui.createSlider(0, 1, .02, .001, xOffset, yOffset);
 
+  // Moon Distance From Sun
   yOffset += gap;
   ui.createLabel('Moon Distance From Sun:', xOffset, yOffset);
   yOffset += ySpacing;
-  UI_moonSunDistance = ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
+  UI_moonSunDistance = ui.createSlider(0, width, 10, 5, xOffset, yOffset);
 
   // Moon Rotation Speed
   yOffset += gap;
   ui.createLabel('Moon Rotation Speed:', xOffset, yOffset);
   yOffset += ySpacing;
-  UI_moonRotationSpeed = ui.createSlider(0, 1, .05, .01, xOffset, yOffset);
+  UI_moonRotationSpeed = ui.createSlider(0, 1, .02, .01, xOffset, yOffset);
 
   yOffset += gap;
   ui.createLabel('Custom Planet Size:', xOffset, yOffset);
   yOffset += ySpacing;
-  ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
+  UI_planetSize = ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
 
   yOffset += gap;
   ui.createLabel('Custom Planet Color:', xOffset, yOffset);
   yOffset += ySpacing;
-  ui.createColorPicker('yellow', xOffset, yOffset);
+  UI_planetColor = ui.createColorPicker('yellow', xOffset, yOffset);
 
   yOffset += gap;
   ui.createLabel('Custom Planet Rotation Speed:', xOffset, yOffset);
   yOffset += ySpacing;
-  ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
+  UI_planetRotationSpeed = ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
 
   yOffset += gap;
   ui.createLabel('Custom Planet Distance From Sun:', xOffset, yOffset);
   yOffset += ySpacing;
-  ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
-
-  yOffset += gap;
-  ui.createLabel('Custom Moon Distance From Sun:', xOffset, yOffset);
-  yOffset += ySpacing;
-  ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
+  UI_planetSunDistance = ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
 
   yOffset += gap;
   ui.createLabel('Has Moon:', xOffset, yOffset);
-  ui.createCheckbox('', false, xOffset + 170, yOffset)
+  UI_planetHasMoon = ui.createCheckbox('', false, xOffset + 170, yOffset)
 
   yOffset += gap;
-  ui.createLabel('Custom Moon Distance From Sun:', xOffset, yOffset);
+  ui.createLabel('Custom Moon Distance From Planet:', xOffset, yOffset);
   yOffset += ySpacing;
-  ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
+  UI_planetMoonDistance = ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
 
   yOffset += gap;
   ui.createLabel('Custom Moon Rotation Speed:', xOffset, yOffset);
   yOffset += ySpacing;
-  ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
+  UI_planetMoonRotationSpeed = ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
 
   yOffset += gap;
   ui.createLabel('Custom Moon Size:', xOffset, yOffset);
   yOffset += ySpacing;
-  ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
+  UI_planetMoonSize = ui.createSlider(0, 500, 50, 5, xOffset, yOffset);
 
   yOffset += gap;
-  ui.createButton('Add Planet', xOffset, yOffset)
-  ui.createButton('Remove Last Planet', xOffset + 120, yOffset)
+  ui.createButton('Add Planet', xOffset, yOffset, addPlanet);
+  ui.createButton('Remove Last Planet', xOffset + 120, yOffset, removeLastPlanet)
   yOffset += ySpacing
   ui.createButton('Pause/Resume', xOffset, yOffset)
-  ui.createButton('Reset', xOffset + 120, yOffset)
+  ui.createButton('Reset', xOffset + 120, yOffset, test)
 }
 
 function updateStarCount() {
