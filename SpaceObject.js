@@ -11,17 +11,8 @@ class SpaceObject {
   createSpaceObject() {
     // Disable wireframe
     noStroke();
-     
-    if(this.texture == null) {
-      // Add the color
-      ambientLight(this.color[0], this.color[1], this.color[2]);
-      ambientMaterial(255)
-    }
-    else {
-      // Load the texture for the celestial object
-      texture(this.texture);
-    }
-
+    
+    this.loadSurface(this.texture,this.color);
 
     // Rotate around the sun
     rotate(frameCount * this.rotationSpeed);
@@ -41,9 +32,8 @@ class SpaceObject {
     // Disable wireframe
     noStroke();
 
-    // Load the texture for the moon
-    texture(moonTexture);
-
+    this.loadSurface(moonTexture, this.color);
+    
     push();
     // Rotate the moon around its parent planet
     rotate(frameCount * rotationSpeed);
@@ -55,7 +45,19 @@ class SpaceObject {
     sphere(8, 20, 20);
     pop();
 
-}
+  }
+
+  loadSurface(txtr, clr = null) {
+    if(txtr == null) {
+      // Add the color
+      ambientLight(clr[0], clr[1], clr[2]);
+      ambientMaterial(255)
+    }
+    else {
+      // Load the texture for the celestial object
+      texture(txtr);
+    }
+  }
 
   static createStarfield(numStars, starPositions) {
     // Set seed
