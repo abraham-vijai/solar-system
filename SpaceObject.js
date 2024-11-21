@@ -28,7 +28,7 @@ class SpaceObject {
 
   }
   
-  addMoon(distanceFromPlanet, distanceFromSun, rotationSpeed, moonTexture) {
+  createMoon(moonSize, distanceFromPlanet, rotationSpeed, moonTexture) {
     // Disable wireframe
     noStroke();
 
@@ -39,10 +39,10 @@ class SpaceObject {
     rotate(frameCount * rotationSpeed);
 
     // Translate to moon's position relative to the planet
-    translate(distanceFromPlanet+distanceFromSun, 0);
+    translate(distanceFromPlanet+5, 0);
 
     // Draw the moon sphere
-    sphere(8, 20, 20);
+    sphere(moonSize, 20, 20);
     pop();
 
   }

@@ -9,7 +9,7 @@ let starCount = 100;
 let UI_starCount;
 let UI_earthSunDistance;
 let UI_earthRotationSpeed;
-let UI_moonSunDistance;
+let UI_moonEarthDistance;
 let UI_moonRotationSpeed;
 let UI_planetRotationSpeed;
 let UI_planetSize;
@@ -45,7 +45,7 @@ function draw() {
   // Create the earth and moon
   push();
   earth.createSpaceObject();
-  earth.createMoon(5, 40,UI_moonSunDistance.value(), UI_moonRotationSpeed.value(), moonTexure);
+  earth.createMoon(5, UI_moonEarthDistance.value(), UI_moonRotationSpeed.value(), moonTexure);
   pop();
 
   // Display the planets in the array
@@ -82,11 +82,11 @@ function setupUI() {
   yOffset += ySpacing;
   UI_earthRotationSpeed = ui.createSlider(0, 1, .02, .001, xOffset, yOffset);
 
-  // Moon Distance From Sun
+  // Moon Distance From Earth
   yOffset += gap;
-  ui.createLabel('Moon Distance From Sun:', xOffset, yOffset);
+  ui.createLabel('Moon Distance From Earth:', xOffset, yOffset);
   yOffset += ySpacing;
-  UI_moonSunDistance = ui.createSlider(0, width, 10, 5, xOffset, yOffset);
+  UI_moonEarthDistance = ui.createSlider(0, width, 10, 5, xOffset, yOffset);
 
   // Moon Rotation Speed
   yOffset += gap;
@@ -158,6 +158,7 @@ function addPlanet() {
 
   push();
 
+  // Store the new planet in the array
   planetArray.push(newPlanet = new SpaceObject(
     UI_planetSize.value(),
     UI_planetRotationSpeed.value(),
@@ -165,7 +166,7 @@ function addPlanet() {
     null,
     UI_planetSunDistance.value(),
     rgbColor
-  )); // Store the new planet in the array
+  )); 
 
   // Add moon if the checkbox is checked
   if (UI_planetHasMoon.checked()) {
