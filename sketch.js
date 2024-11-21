@@ -42,12 +42,18 @@ function draw() {
   sun.createSpaceObject();
   pop();
   
-  // Create the earth
+  // Create the earth and moon
   push();
   earth.createSpaceObject();
   earth.addMoon(40,UI_moonSunDistance.value(), UI_moonRotationSpeed.value(), moonTexure);
   pop();
 
+  // Display the planets in the array
+  for(let planet of planetArray){
+    push();
+    planet.createSpaceObject();
+    pop();
+  }
 }
 
 function setupUI() {
@@ -132,7 +138,19 @@ function setupUI() {
   ui.createButton('Remove Last Planet', xOffset + 120, yOffset, removeLastPlanet)
   yOffset += ySpacing
   ui.createButton('Pause/Resume', xOffset, yOffset)
-  ui.createButton('Reset', xOffset + 120, yOffset, test)
+  ui.createButton('Reset', xOffset + 120, yOffset)
+}
+
+function addPlanet() {
+  let newPlanet;
+
+  planetArray.push(newPlanet = new SpaceObject(
+    UI_planetSize.value(),
+    UI_planetRotationSpeed.value(),
+    15,
+    moonTexure,
+    UI_planetSunDistance.value()
+  )); // Store the new planet in the array
 }
 
 function updateStarCount() {
