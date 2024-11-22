@@ -64,4 +64,98 @@ class UI {
         if (this.parent) checkbox.parent(this.parent);
         return checkbox;
     }
+
+    static setupUI() {
+        ui = new UI();
+      
+        let xOffset = width + 10; // Starting x position
+        let yOffset = 0;  // Starting y position
+        let ySpacing = 20;
+        let gap = 40;  // Vertical space between rows
+      
+        // Number of Stars
+        ui.createLabel('Number of Stars:', xOffset, yOffset)
+        yOffset += ySpacing;
+        UI_starCount = ui.createTextBox('100', xOffset, yOffset);
+        ui.createButton('Update Stars', xOffset + 170, yOffset, ButtonAction.updateStarCount);
+      
+        // Earth Distance From Sun
+        yOffset += gap;
+        ui.createLabel('Earth Distance From Sun:', xOffset, yOffset);
+        yOffset += ySpacing;
+        UI_earthSunDistance = ui.createSlider(0, width/2, 200, 5, xOffset, yOffset);
+      
+        // Earth Rotation Speed
+        yOffset += gap;
+        ui.createLabel('Earth Rotation Speed:', xOffset, yOffset);
+        yOffset += ySpacing;
+        UI_earthRotationSpeed = ui.createSlider(0, .05, .02, .001, xOffset, yOffset);
+      
+        // Moon Distance From Earth
+        yOffset += gap;
+        ui.createLabel('Moon Distance From Earth:', xOffset, yOffset);
+        yOffset += ySpacing;
+        UI_moonEarthDistance = ui.createSlider(0, 50, 30, 1, xOffset, yOffset);
+      
+        // Moon Rotation Speed
+        yOffset += gap;
+        ui.createLabel('Moon Rotation Speed:', xOffset, yOffset);
+        yOffset += ySpacing;
+        UI_moonRotationSpeed = ui.createSlider(0, .05, .02, .001, xOffset, yOffset);
+      
+        // Custom Planet Size:
+        yOffset += gap;
+        ui.createLabel('Custom Planet Size:', xOffset, yOffset);
+        yOffset += ySpacing;
+        UI_planetSize = ui.createSlider(0, 100, 20, 1, xOffset, yOffset);
+      
+        // Custom Planet Color
+        yOffset += gap;
+        ui.createLabel('Custom Planet Color:', xOffset, yOffset);
+        yOffset += ySpacing;
+        UI_planetColor = ui.createColorPicker('yellow', xOffset, yOffset);
+      
+        // Custom Planet Rotation Speed
+        yOffset += gap;
+        ui.createLabel('Custom Planet Rotation Speed:', xOffset, yOffset);
+        yOffset += ySpacing;
+        UI_planetRotationSpeed = ui.createSlider(0, .05, .02, .001, xOffset, yOffset);
+      
+        // Custom Planet Distance From Sun
+        yOffset += gap;
+        ui.createLabel('Custom Planet Distance From Sun:', xOffset, yOffset);
+        yOffset += ySpacing;
+        UI_planetSunDistance = ui.createSlider(0, width/2, 100, 5, xOffset, yOffset);
+      
+        // Planet Has Moon
+        yOffset += gap;
+        ui.createLabel('Has Moon:', xOffset, yOffset);
+        UI_planetHasMoon = ui.createCheckbox('', false, xOffset + 170, yOffset)
+      
+        // Custom Moon Distance From Planet
+        yOffset += gap;
+        ui.createLabel('Custom Moon Distance From Planet:', xOffset, yOffset);
+        yOffset += ySpacing;
+        UI_planetMoonDistance = ui.createSlider(0, 50, 30, 1, xOffset, yOffset);
+      
+        // Custom Moon Rotation Speed
+        yOffset += gap;
+        ui.createLabel('Custom Moon Rotation Speed:', xOffset, yOffset);
+        yOffset += ySpacing;
+        UI_planetMoonRotationSpeed = ui.createSlider(0, .05, .02, .001, xOffset, yOffset);
+      
+        // Custom Moon Size
+        yOffset += gap;
+        ui.createLabel('Custom Moon Size:', xOffset, yOffset);
+        yOffset += ySpacing;
+        UI_planetMoonSize = ui.createSlider(0, 100, 10, 5, xOffset, yOffset);
+      
+        yOffset += gap;
+        ui.createButton('Add Planet', xOffset, yOffset, ButtonAction.addPlanet);
+        ui.createButton('Remove Last Planet', xOffset + 120, yOffset, ButtonAction.removeLastPlanet)
+        yOffset += ySpacing
+        ui.createButton('Pause/Resume', xOffset, yOffset, ButtonAction.pauseResume)
+        ui.createButton('Reset', xOffset + 120, yOffset, ButtonAction.resetSystem)
+      }
+      
 }
