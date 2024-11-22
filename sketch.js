@@ -4,7 +4,6 @@ let sunTexture, earthTexture, moonTexure;
 let starPositions = [];
 let planetArray = [];
 let ui;
-let starCount = 100;
 let isPaused = false;
 
 let UI_starCount;
@@ -36,7 +35,7 @@ function draw() {
   let sun = new SpaceObject(30, .05, 15, sunTexture, 0, false, null);
   
   // Create the starfield
-  SpaceObject.createStarfield(starCount, starPositions)
+  SpaceObject.createStarfield()
 
   // Create the sun
   push();

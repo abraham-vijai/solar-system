@@ -10,9 +10,13 @@ class ButtonAction {
     }
 
     static updateStarCount() {
-        starPositions = [];
-        starCount = UI_starCount.value();
+        // Empty the array
+        SpaceObject.starArray = [];
+
+        // Set the star count value
+        SpaceObject.setStarCount(UI_starCount.value());
     }
+
     static resetSystem(params) {
         planetArray = [];
     }

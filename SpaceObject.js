@@ -8,8 +8,11 @@ class SpaceObject {
     this.rotationSpeed = objectRotationSpeed;
     this.hasMoon = objectHasMoon;
     this.color = objectColor;
-  }
 
+  }
+  static starCount = 100;
+  static starArray = [];
+  
   createSpaceObject() {
     // Disable wireframe
     noStroke();
@@ -51,32 +54,44 @@ class SpaceObject {
   }
 
   loadSurface(txtr, clr = null) {
-    if(txtr == null) {
-      // Add the color
-      ambientLight(clr[0], clr[1], clr[2]);
-      ambientMaterial(255)
-    }
-    else {
+    if (txtr == null) {
+      // Use ambient and directional light to enhance the 3D look
+      ambientLight(150); // General ambient light
+      directionalLight(255, 255, 255, 0, 0, -1); // Add a light shining from the camera direction
+  
+      // Set material properties based on the provided color
+      if (clr) {
+        ambientMaterial(clr[0], clr[1], clr[2]); // Apply ambient color
+      } else {
+        ambientMaterial(255); // Default white material
+      }
+    } else {
       // Load the texture for the celestial object
-      texture(txtr);
+      // ambientLight(150); // General ambient light
+      // directionalLight(255, 255, 255, 0, 0, -1); // Ensure proper shading for the texture
+      texture(txtr); // Apply the texture
     }
   }
+  
+  static setStarCount(newStarCount){
+    this.starCount = newStarCount;
+  }
 
-  static createStarfield(numStars, starPositions) {
+  static createStarfield() {
     // Set seed
     randomSeed(100);
 
     // Generate star positions once
-    if (starPositions.length == 0) {
-      for (let i = 0; i < numStars; i++) {
-        starPositions.push({
+    if (this.starArray.length == 0) {
+      for (let i = 0; i < this.starCount; i++) {
+        this.starArray.push({
           x: random(-width/2, width/2),
           y: random(-height/2, height/2),
         });
       }
     }
   
-    for (let star of starPositions) {
+    for (let star of this.starArray) {
       // Draw the stars
       strokeWeight(3);
       stroke(random(180,255),random(180,255),random(180,255));
