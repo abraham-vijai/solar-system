@@ -5,6 +5,7 @@ let starPositions = [];
 let planetArray = [];
 let ui;
 let starCount = 100;
+let isPaused = false;
 
 let UI_starCount;
 let UI_earthSunDistance;
@@ -159,8 +160,19 @@ function setupUI() {
   ui.createButton('Add Planet', xOffset, yOffset, addPlanet);
   ui.createButton('Remove Last Planet', xOffset + 120, yOffset, removeLastPlanet)
   yOffset += ySpacing
-  ui.createButton('Pause/Resume', xOffset, yOffset)
+  ui.createButton('Pause/Resume', xOffset, yOffset, pauseResume)
   ui.createButton('Reset', xOffset + 120, yOffset)
+}
+
+function pauseResume() {
+  if(isPaused){
+    loop();
+    isPaused = false;
+  }
+  else{
+    noLoop();
+    isPaused = true;
+  }
 }
 
 function addPlanet() {
