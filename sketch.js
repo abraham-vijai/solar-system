@@ -32,8 +32,8 @@ function setup() {
 function draw() {
   background('black');
 
-  let earth = new SpaceObject(10, UI_earthRotationSpeed.value(), 15, earthTexture, UI_earthSunDistance.value(), true, moonTexure);
-  let sun = new SpaceObject(30, .05, 15, sunTexture, 0, false);
+  let earth = new SpaceObject(10, UI_earthRotationSpeed.value(), 15, earthTexture, UI_earthSunDistance.value(), true, null);
+  let sun = new SpaceObject(30, .05, 15, sunTexture, 0, false, null);
   
   // Create the starfield
   SpaceObject.createStarfield(starCount, starPositions)
@@ -60,14 +60,14 @@ function draw() {
     let rgbColor = [red(c), green(c), blue(c)]; // Extract RGB values as an array
     
     // Add moon if the checkbox is checked       
-    if (UI_planetHasMoon.checked()) {
-      planet.createMoon(
-        UI_planetMoonSize.value(),
-        UI_planetMoonDistance.value(),
-        UI_planetMoonRotationSpeed.value(),
-        null
-      );
-    }
+    // if (planet.hasMoon == true) {
+    //     planet.createMoon(
+    //     UI_planetMoonSize.value(),
+    //     UI_planetMoonDistance.value(),
+    //     UI_planetMoonRotationSpeed.value(),
+    //     rgbColor
+    //   );
+    // }
     pop();
   }
 }
@@ -161,7 +161,11 @@ function setupUI() {
   ui.createButton('Remove Last Planet', xOffset + 120, yOffset, removeLastPlanet)
   yOffset += ySpacing
   ui.createButton('Pause/Resume', xOffset, yOffset, pauseResume)
-  ui.createButton('Reset', xOffset + 120, yOffset)
+  ui.createButton('Reset', xOffset + 120, yOffset, resetSystem)
+}
+
+function resetSystem(params) {
+  planetArray = [];
 }
 
 function pauseResume() {
@@ -190,18 +194,14 @@ function addPlanet() {
     15,
     null,
     UI_planetSunDistance.value(),
+    false,
     rgbColor
   )); 
 
-  // // Add moon if the checkbox is checked
-  // if (UI_planetHasMoon.checked()) {
-  //   newPlanet.createMoon(
-  //     UI_planetMoonSize.value(),
-  //     UI_planetMoonDistance.value(),
-  //     UI_planetMoonRotationSpeed.value(),
-  //     rgbColor
-  //   );
-  // }
+  // Add moon if the checkbox is checked
+  if (UI_planetHasMoon.checked()) {
+    newPlanet.hasMoon = true;
+  }
 
 }
 
