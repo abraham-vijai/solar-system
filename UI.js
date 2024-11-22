@@ -82,7 +82,7 @@ class UI {
     }
 
     static setupUI() {
-        ui = new UI();
+        let ui = new UI();
 
         let xOffset = width + 10; // Starting x position
         let yOffset = 0;  // Starting y position
