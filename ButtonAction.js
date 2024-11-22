@@ -7,10 +7,10 @@ class ButtonAction {
 
     static removeLastPlanet() {
         // Check if array is not empty
-        if (planetArray.length > 0) {
+        if (SpaceObject.planetArray.length > 0) {
 
             // Remove the last planet in the array
-            planetArray.pop(); 
+            SpaceObject.planetArray.pop(); 
         }
     }
 
@@ -24,7 +24,7 @@ class ButtonAction {
 
     static resetSystem() {
         // Empty the array
-        planetArray = [];
+        SpaceObject.planetArray = [];
     }
 
     static pauseResume() {
@@ -42,7 +42,7 @@ class ButtonAction {
         let newPlanet;
 
         // Store the new planet in the array
-        planetArray.push(newPlanet = new SpaceObject(
+        SpaceObject.planetArray.push(newPlanet = new SpaceObject(
             UI.UI_planetSize.value(),
             UI.UI_planetRotationSpeed.value(),
             15,
