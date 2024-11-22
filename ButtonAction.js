@@ -14,7 +14,7 @@ class ButtonAction {
         SpaceObject.starArray = [];
 
         // Set the star count value
-        SpaceObject.setStarCount(UI_starCount.value());
+        SpaceObject.setStarCount(UI.UI_starCount.value());
     }
 
     static resetSystem(params) {
@@ -36,18 +36,18 @@ class ButtonAction {
         let newPlanet;
 
         // Convert to RGB
-        let hexColor = UI_planetColor.value(); // Get the color from the color picker
+        let hexColor = UI.UI_planetColor.value(); // Get the color from the color picker
         let c = color(hexColor); // Convert hex to a p5.js color object
         let rgbColor = [red(c), green(c), blue(c)]; // Extract RGB values as an array
 
         // Store the new planet in the array
         planetArray.push(newPlanet = new SpaceObject(
-            UI_planetSize.value(),
-            UI_planetRotationSpeed.value(),
+            UI.UI_planetSize.value(),
+            UI.UI_planetRotationSpeed.value(),
             15,
             null,
-            UI_planetSunDistance.value(),
-            UI_planetHasMoon.checked(),
+            UI.UI_planetSunDistance.value(),
+            UI.UI_planetHasMoon.checked(),
             rgbColor
         ));
     }

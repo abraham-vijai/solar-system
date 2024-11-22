@@ -10,6 +10,7 @@ class SpaceObject {
     this.color = objectColor;
 
   }
+
   static starCount = 100;
   static starArray = [];
 
@@ -57,14 +58,14 @@ class SpaceObject {
     if (txtr == null) {
       // Use ambient and directional light
       ambientLight(150);
-      directionalLight(255, 255, 255, 0, 0, -1); 
+      directionalLight(255, 255, 255, 0, 0, -1);
 
       // Set the color
       ambientMaterial(clr[0], clr[1], clr[2]);
     }
     else {
       // Apply the texture
-      texture(txtr); 
+      texture(txtr);
     }
   }
 
