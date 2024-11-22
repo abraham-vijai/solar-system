@@ -12,7 +12,8 @@ class SpaceObject {
   
   static starCount = 100;
   static starArray = [];
-
+  static planetArray = [];
+  
   createSpaceObject() {
     // Disable wireframe
     noStroke();
