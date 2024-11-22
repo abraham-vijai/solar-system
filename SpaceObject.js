@@ -1,10 +1,12 @@
 class SpaceObject {
-  constructor(objectRadius, objectRotationSpeed, objectSubdivision, objectTexture, objectDistance, objectColor = null) {
+
+  constructor(objectRadius, objectRotationSpeed, objectSubdivision, objectTexture, objectDistance, objectHasMoon = false,objectColor = null) {
     this.radius = objectRadius;
     this.subdivision = objectSubdivision;
     this.texture = objectTexture;
     this.distance = objectDistance;
     this.rotationSpeed = objectRotationSpeed;
+    this.hasMoon = objectHasMoon;
     this.color = objectColor;
   }
 
@@ -29,22 +31,23 @@ class SpaceObject {
   }
   
   createMoon(moonSize, distanceFromPlanet, rotationSpeed, moonTexture) {
-    // Disable wireframe
-    noStroke();
+    if(this.hasMoon) {
+      // Disable wireframe
+      noStroke();
 
-    this.loadSurface(moonTexture, this.color);
-    
-    push();
-    // Rotate the moon around its parent planet
-    rotate(frameCount * rotationSpeed);
+      this.loadSurface(moonTexture, this.color);
+      
+      push();
+      // Rotate the moon around its parent planet
+      rotate(frameCount * rotationSpeed);
 
-    // Translate to moon's position relative to the planet
-    translate(distanceFromPlanet+5, 0);
+      // Translate to moon's position relative to the planet
+      translate(distanceFromPlanet+5, 0);
 
-    // Draw the moon sphere
-    sphere(moonSize, 20, 20);
-    pop();
-
+      // Draw the moon sphere
+      sphere(moonSize, 20, 20);
+      pop();
+    }
   }
 
   loadSurface(txtr, clr = null) {

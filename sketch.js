@@ -53,21 +53,7 @@ function draw() {
   for(let planet of planetArray){
     push();
     planet.createSpaceObject();
-    
-    // Convert to RGB
-    let hexColor = UI_planetColor.value(); // Get the color from the color picker
-    let c = color(hexColor); // Convert hex to a p5.js color object
-    let rgbColor = [red(c), green(c), blue(c)]; // Extract RGB values as an array
-    
-    // Add moon if the checkbox is checked       
-    // if (planet.hasMoon == true) {
-    //     planet.createMoon(
-    //     UI_planetMoonSize.value(),
-    //     UI_planetMoonDistance.value(),
-    //     UI_planetMoonRotationSpeed.value(),
-    //     rgbColor
-    //   );
-    // }
+    planet.createMoon(UI_planetMoonSize.value(), UI_planetMoonDistance.value(),UI_planetMoonRotationSpeed.value(), moonTexure);
     pop();
   }
 }
@@ -90,25 +76,25 @@ function setupUI() {
   yOffset += gap;
   ui.createLabel('Earth Distance From Sun:', xOffset, yOffset);
   yOffset += ySpacing;
-  UI_earthSunDistance = ui.createSlider(0, width, 200, 5, xOffset, yOffset);
+  UI_earthSunDistance = ui.createSlider(0, width/2, 200, 5, xOffset, yOffset);
 
   // Earth Rotation Speed
   yOffset += gap;
   ui.createLabel('Earth Rotation Speed:', xOffset, yOffset);
   yOffset += ySpacing;
-  UI_earthRotationSpeed = ui.createSlider(0, 1, .02, .001, xOffset, yOffset);
+  UI_earthRotationSpeed = ui.createSlider(0, .05, .02, .001, xOffset, yOffset);
 
   // Moon Distance From Earth
   yOffset += gap;
   ui.createLabel('Moon Distance From Earth:', xOffset, yOffset);
   yOffset += ySpacing;
-  UI_moonEarthDistance = ui.createSlider(0, width, 10, 5, xOffset, yOffset);
+  UI_moonEarthDistance = ui.createSlider(0, 200, 10, 5, xOffset, yOffset);
 
   // Moon Rotation Speed
   yOffset += gap;
   ui.createLabel('Moon Rotation Speed:', xOffset, yOffset);
   yOffset += ySpacing;
-  UI_moonRotationSpeed = ui.createSlider(0, 1, .02, .01, xOffset, yOffset);
+  UI_moonRotationSpeed = ui.createSlider(0, .05, .02, .01, xOffset, yOffset);
 
   // Custom Planet Size:
   yOffset += gap;
@@ -164,6 +150,15 @@ function setupUI() {
   ui.createButton('Reset', xOffset + 120, yOffset, resetSystem)
 }
 
+function convertToRgb(colorToConvert) {
+  // Convert to RGB
+  let hexColor = colorToConvert; // Get the color from the color picker
+  let c = color(hexColor); // Convert hex to a p5.js color object
+  let rgbColor = [red(c), green(c), blue(c)]; // Extract RGB values as an array
+
+  return rgbColor
+}
+
 function resetSystem(params) {
   planetArray = [];
 }
@@ -183,9 +178,7 @@ function addPlanet() {
   let newPlanet;
 
   // Convert to RGB
-  let hexColor = UI_planetColor.value(); // Get the color from the color picker
-  let c = color(hexColor); // Convert hex to a p5.js color object
-  let rgbColor = [red(c), green(c), blue(c)]; // Extract RGB values as an array
+  let rgbColor = convertToRgb(UI_planetColor.value());
 
   // Store the new planet in the array
   planetArray.push(newPlanet = new SpaceObject(
@@ -194,15 +187,9 @@ function addPlanet() {
     15,
     null,
     UI_planetSunDistance.value(),
-    false,
+    UI_planetHasMoon.checked(),
     rgbColor
   )); 
-
-  // Add moon if the checkbox is checked
-  if (UI_planetHasMoon.checked()) {
-    newPlanet.hasMoon = true;
-  }
-
 }
 
 function removeLastPlanet() {
