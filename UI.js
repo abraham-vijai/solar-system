@@ -168,12 +168,11 @@ class UI {
         yOffset += ySpacing;
         this.UI_planetMoonSize = ui.createSlider(0, 100, 10, 5, xOffset, yOffset);
 
-        yOffset += gap;
-        ui.createButton('Add Planet', xOffset, yOffset, ButtonAction.addPlanet);
-        ui.createButton('Remove Last Planet', xOffset + 120, yOffset, ButtonAction.removeLastPlanet)
-        yOffset += ySpacing
-        ui.createButton('Pause/Resume', xOffset, yOffset, ButtonAction.pauseResume)
-        ui.createButton('Reset', xOffset + 120, yOffset, ButtonAction.resetSystem)
+        yOffset -= 10;
+        ui.createButton('Add Planet', 10, yOffset, ButtonAction.addPlanet);
+        ui.createButton('Remove Last Planet', 110, yOffset, ButtonAction.removeLastPlanet)
+        ui.createButton('Pause/Resume', 110 + 160, yOffset, ButtonAction.pauseResume)
+        ui.createButton('Reset', 110 + 160 + 130, yOffset, ButtonAction.resetSystem)
     }
 
 }
