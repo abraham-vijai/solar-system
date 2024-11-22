@@ -3,9 +3,14 @@ class ButtonAction {
 
     }
 
+    static isPaused = false;
+
     static removeLastPlanet() {
+        // Check if array is not empty
         if (planetArray.length > 0) {
-            planetArray.pop(); // Remove the last planet in the array
+
+            // Remove the last planet in the array
+            planetArray.pop(); 
         }
     }
 
@@ -17,28 +22,24 @@ class ButtonAction {
         SpaceObject.setStarCount(UI.UI_starCount.value());
     }
 
-    static resetSystem(params) {
+    static resetSystem() {
+        // Empty the array
         planetArray = [];
     }
 
     static pauseResume() {
-        if (isPaused) {
+        if (this.isPaused) {
             loop();
-            isPaused = false;
+            this.isPaused = false;
         }
         else {
             noLoop();
-            isPaused = true;
+            this.isPaused = true;
         }
     }
 
     static addPlanet() {
         let newPlanet;
-
-        // Convert to RGB
-        let hexColor = UI.UI_planetColor.value(); // Get the color from the color picker
-        let c = color(hexColor); // Convert hex to a p5.js color object
-        let rgbColor = [red(c), green(c), blue(c)]; // Extract RGB values as an array
 
         // Store the new planet in the array
         planetArray.push(newPlanet = new SpaceObject(
@@ -48,7 +49,7 @@ class ButtonAction {
             null,
             UI.UI_planetSunDistance.value(),
             UI.UI_planetHasMoon.checked(),
-            rgbColor
+            UI.UI_planetColor.value()
         ));
     }
 
