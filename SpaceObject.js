@@ -1,6 +1,6 @@
 class SpaceObject {
 
-  constructor(objectRadius, objectRotationSpeed, objectSubdivision, objectTexture, objectDistance, objectHasMoon = false,objectColor = null) {
+  constructor(objectRadius, objectRotationSpeed, objectSubdivision, objectTexture, objectDistance, objectHasMoon = false, objectColor = null) {
     this.radius = objectRadius;
     this.subdivision = objectSubdivision;
     this.texture = objectTexture;
@@ -12,12 +12,12 @@ class SpaceObject {
   }
   static starCount = 100;
   static starArray = [];
-  
+
   createSpaceObject() {
     // Disable wireframe
     noStroke();
-    
-    this.loadSurface(this.texture,this.color);
+
+    this.loadSurface(this.texture, this.color);
 
     // Rotate around the sun
     rotate(frameCount * this.rotationSpeed);
@@ -32,20 +32,20 @@ class SpaceObject {
     sphere(this.radius, this.subdivision, this.subdivision);
 
   }
-  
+
   createMoon(moonSize, distanceFromPlanet, rotationSpeed, moonTexture) {
-    if(this.hasMoon) {
+    if (this.hasMoon) {
       // Disable wireframe
       noStroke();
 
       this.loadSurface(moonTexture, this.color);
-      
+
       push();
       // Rotate the moon around its parent planet
       rotate(frameCount * rotationSpeed);
 
       // Translate to moon's position relative to the planet
-      translate(distanceFromPlanet+5, 0);
+      translate(distanceFromPlanet + 5, 0);
 
       // Draw the moon sphere
       sphere(moonSize, 20, 20);
@@ -55,25 +55,20 @@ class SpaceObject {
 
   loadSurface(txtr, clr = null) {
     if (txtr == null) {
-      // Use ambient and directional light to enhance the 3D look
-      ambientLight(150); // General ambient light
-      directionalLight(255, 255, 255, 0, 0, -1); // Add a light shining from the camera direction
-  
-      // Set material properties based on the provided color
-      if (clr) {
-        ambientMaterial(clr[0], clr[1], clr[2]); // Apply ambient color
-      } else {
-        ambientMaterial(255); // Default white material
-      }
-    } else {
-      // Load the texture for the celestial object
-      // ambientLight(150); // General ambient light
-      // directionalLight(255, 255, 255, 0, 0, -1); // Ensure proper shading for the texture
-      texture(txtr); // Apply the texture
+      // Use ambient and directional light
+      ambientLight(150);
+      directionalLight(255, 255, 255, 0, 0, -1); 
+
+      // Set the color
+      ambientMaterial(clr[0], clr[1], clr[2]);
+    }
+    else {
+      // Apply the texture
+      texture(txtr); 
     }
   }
-  
-  static setStarCount(newStarCount){
+
+  static setStarCount(newStarCount) {
     this.starCount = newStarCount;
   }
 
@@ -85,18 +80,18 @@ class SpaceObject {
     if (this.starArray.length == 0) {
       for (let i = 0; i < this.starCount; i++) {
         this.starArray.push({
-          x: random(-width/2, width/2),
-          y: random(-height/2, height/2),
+          x: random(-width / 2, width / 2),
+          y: random(-height / 2, height / 2),
         });
       }
     }
-  
+
     for (let star of this.starArray) {
       // Draw the stars
       strokeWeight(3);
-      stroke(random(180,255),random(180,255),random(180,255));
+      stroke(random(180, 255), random(180, 255), random(180, 255));
       point(star.x, star.y);
     }
-  
+
   }
 }
