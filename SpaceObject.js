@@ -8,9 +8,8 @@ class SpaceObject {
     this.rotationSpeed = objectRotationSpeed;
     this.hasMoon = objectHasMoon;
     this.color = objectColor;
-
   }
-
+  
   static starCount = 100;
   static starArray = [];
 
@@ -18,6 +17,7 @@ class SpaceObject {
     // Disable wireframe
     noStroke();
 
+    // Add texture or color
     this.loadSurface(this.texture, this.color);
 
     // Rotate around the sun
@@ -34,14 +34,16 @@ class SpaceObject {
 
   }
 
-  createMoon(moonSize, distanceFromPlanet, rotationSpeed, moonTexture) {
+  createMoon(moonSize, distanceFromPlanet, rotationSpeed, customTexture, moonColor) {
     if (this.hasMoon) {
       // Disable wireframe
       noStroke();
 
-      this.loadSurface(moonTexture, this.color);
+      // Add texture or color
+      this.loadSurface(customTexture, moonColor);
 
       push();
+
       // Rotate the moon around its parent planet
       rotate(frameCount * rotationSpeed);
 
@@ -50,22 +52,30 @@ class SpaceObject {
 
       // Draw the moon sphere
       sphere(moonSize, 20, 20);
+
       pop();
     }
   }
 
-  loadSurface(txtr, clr = null) {
-    if (txtr == null) {
+  loadSurface(customTexture, customColor) {
+    if (customTexture == null) {
+      // Convert the color to RGB
+      let clr = this.convertToRgb(customColor)
+
       // Use ambient and directional light
       ambientLight(150);
-      directionalLight(255, 255, 255, 0, 0, -1);
+      
+      // Set the light
+      colorMode(HSB)
+      directionalLight(255, 0, 50, 0, -5, -5);
+      colorMode(RGB)
 
       // Set the color
       ambientMaterial(clr[0], clr[1], clr[2]);
     }
     else {
       // Apply the texture
-      texture(txtr);
+      texture(customTexture);
     }
   }
 
@@ -94,5 +104,14 @@ class SpaceObject {
       point(star.x, star.y);
     }
 
+  }
+
+  convertToRgb(colorToConvert) {
+
+    // Convert to RGB
+    let hexColor = colorToConvert; // Get the color from the color picker
+    let c = color(hexColor); // Convert hex to a p5.js color object
+
+    return [red(c), green(c), blue(c)]
   }
 }
