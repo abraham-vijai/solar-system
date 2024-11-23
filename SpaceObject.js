@@ -111,7 +111,7 @@ class SpaceObject {
       rotate(frameCount * this.moonRotationSpeed);
 
       // Translate to moon's position relative to the planet
-      translate(this.moonPlanetDistance + 5, 0);
+      translate(this.radius + this.moonPlanetDistance + 5, 0);
 
       // Draw the moon sphere
       sphere(this.moonSize, 20, 20);
