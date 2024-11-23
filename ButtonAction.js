@@ -96,7 +96,7 @@ class ButtonAction {
         // Set moon values if the planet has a moon
         if (UI.UI_planetHasMoon.checked()) {
             newPlanet.setMoonValues(
-                UI.UI_planetSize.value(),
+                UI.UI_planetMoonSize.value(),
                 UI.UI_planetMoonRotationSpeed.value(),
                 UI.UI_planetMoonDistance.value(),
                 null
