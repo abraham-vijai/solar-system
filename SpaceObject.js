@@ -35,13 +35,18 @@ class SpaceObject {
 
   }
 
-  createMoon(moonSize, distanceFromPlanet, rotationSpeed, customTexture, moonColor) {
+  createMoon(moonSize, distanceFromPlanet, rotationSpeed, customTexture) {
     if (this.hasMoon) {
       // Disable wireframe
       noStroke();
 
       // Add texture or color
-      this.loadSurface(customTexture, moonColor);
+      if(customTexture == null) {
+        normalMaterial();
+      }
+      else{
+        texture(customTexture);
+      }
 
       push();
 

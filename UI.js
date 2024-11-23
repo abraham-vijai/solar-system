@@ -14,7 +14,6 @@ class UI {
     static UI_planetSize;
     static UI_planetSunDistance;
     static UI_planetColor;
-    static UI_planetMoonColor;
     static UI_planetHasMoon;
     static UI_planetMoonRotationSpeed;
     static UI_planetMoonSize;
@@ -128,10 +127,8 @@ class UI {
         // Custom Color
         yOffset += gap;
         ui.createLabel('Custom Planet Color:', xOffset, yOffset);
-        ui.createLabel('Custom Moon Color:', xOffset + 150, yOffset);
         yOffset += ySpacing;
         this.UI_planetColor = ui.createColorPicker('yellow', xOffset, yOffset);
-        this.UI_planetMoonColor = ui.createColorPicker('red', xOffset + 150, yOffset);
 
         // Custom Planet Rotation Speed
         yOffset += gap;

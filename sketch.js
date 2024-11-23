@@ -1,12 +1,13 @@
 const NOISE_SEED = 100;
 
 let sunTexture, earthTexture, moonTexure;
-let planetArray = [];
-let ui;
-let isPaused = false;
+
+let s_moonSize, s_moonColor, s_moonSpeed, s_moonDistance;
 
 function setup() {
   createCanvas(700, 700, WEBGL);
+
+  // Setup the UI
   UI.setupUI();
 
   // Set seeds
@@ -34,11 +35,14 @@ function draw() {
   pop();
 
   // Display the planets in the array
-  for(let planet of planetArray){
+  for(let planet of SpaceObject.planetArray){
     push();
     planet.createSpaceObject();
-    planet.createMoon(UI.UI_planetMoonSize.value(), UI.UI_planetMoonDistance.value(),UI.UI_planetMoonRotationSpeed.value(), moonTexure);
+    planet.createMoon(UI.UI_planetMoonSize.value(), UI.UI_planetMoonDistance.value(),UI.UI_planetMoonRotationSpeed.value(),null);
+    // planet.createMoon(s_moonSize,s_moonDistance,s_moonSpeed,null);
+
     pop();
+    
   }
 }
 

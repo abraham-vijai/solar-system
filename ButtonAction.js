@@ -51,6 +51,18 @@ class ButtonAction {
             UI.UI_planetHasMoon.checked(),
             UI.UI_planetColor.value()
         ));
+
+        if(UI.UI_planetHasMoon.checked()){
+            // newPlanet.createMoon(UI.UI_planetMoonSize.value(), 
+            // UI.UI_planetMoonDistance.value(),
+            // UI.UI_planetMoonRotationSpeed.value(),
+            // null, 
+            // UI.UI_planetMoonColor.value());  
+            
+            // Save these values somewhere
+            // let newMoon = new Moon(UI.UI_planetMoonSize.value(), UI.UI_planetMoonColor.value(), UI.UI_planetMoonRotationSpeed.value(), UI.UI_planetMoonDistance.value())
+            
+        }
     }
 
 }
