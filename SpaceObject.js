@@ -182,7 +182,7 @@ class SpaceObject {
 
     for (let star of this.starArray) {
       // Draw the stars
-      strokeWeight(3);
+      strokeWeight(STAR_WIDTH);
       stroke(random(180, 255), random(180, 255), random(180, 255));
       point(star.x, star.y);
     }

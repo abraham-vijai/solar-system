@@ -5,9 +5,12 @@ Date        : 2024-11-23
 Description : This is the sketch.js function
 */
 
-const NOISE_SEED = 100;
+const SUN_RADIUS = 30;
+const SUN_COLOR = 'yellow';
+const STAR_WIDTH = 3;
+const SUBDIVISION = 15;
 
-let sunTexture, earthTexture, moonTexure;
+let earthTexture, moonTexure;
 
 /*
 Method name  : setup
@@ -20,9 +23,6 @@ function setup() {
 
   // Setup the UI
   UI.setupUI();
-
-  // Set seeds
-  noiseSeed(NOISE_SEED);
 }
 
 /*
@@ -34,8 +34,8 @@ Return value : None
 function draw() {
   background('black');
 
-  let earth = new SpaceObject(10, UI.UI_earthRotationSpeed.value(), 15, earthTexture, UI.UI_earthSunDistance.value(), true, null);
-  let sun = new SpaceObject(30, .05, 15, sunTexture, 0, false, null);
+  let earth = new SpaceObject(10, UI.UI_earthRotationSpeed.value(), SUBDIVISION, earthTexture, UI.UI_earthSunDistance.value(), true, null);
+  let sun = new SpaceObject(SUN_RADIUS, .05, SUBDIVISION, null, 0, false, SUN_COLOR);
 
   // Create the starfield
   SpaceObject.createStarfield();
@@ -68,7 +68,6 @@ Parameters   : None
 Return value : None
 */
 function preload() {
-  sunTexture = loadImage('./assets/sun.jpg');
   earthTexture = loadImage('./assets/earth_daymap.jpg');
   moonTexure = loadImage('./assets/moon.jpg');
 }

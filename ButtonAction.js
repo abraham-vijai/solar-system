@@ -85,7 +85,7 @@ class ButtonAction {
             newPlanet = new SpaceObject(
                 UI.UI_planetSize.value(),
                 UI.UI_planetRotationSpeed.value(),
-                15,
+                SUBDIVISION,
                 null,
                 UI.UI_planetSunDistance.value(),
                 UI.UI_planetHasMoon.checked(),
