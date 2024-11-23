@@ -19,7 +19,7 @@ function draw() {
 
   let earth = new SpaceObject(10, UI.UI_earthRotationSpeed.value(), 15, earthTexture, UI.UI_earthSunDistance.value(), true, null);
   let sun = new SpaceObject(30, .05, 15, sunTexture, 0, false, null);
-  
+
   // Create the starfield
   SpaceObject.createStarfield()
 
@@ -27,22 +27,20 @@ function draw() {
   push();
   sun.createSpaceObject();
   pop();
-  
+
   // Create the earth and moon
   push();
   earth.createSpaceObject();
-  earth.createMoon(5, UI.UI_moonEarthDistance.value(), UI.UI_moonRotationSpeed.value(), moonTexure);
+  earth.setMoonValues(5, UI.UI_moonRotationSpeed.value(), UI.UI_moonEarthDistance.value(), moonTexure);
+  earth.createMoon();
   pop();
 
   // Display the planets in the array
-  for(let planet of SpaceObject.planetArray){
+  for (let planet of SpaceObject.planetArray) {
     push();
     planet.createSpaceObject();
-    planet.createMoon(UI.UI_planetMoonSize.value(), UI.UI_planetMoonDistance.value(),UI.UI_planetMoonRotationSpeed.value(),null);
-    // planet.createMoon(s_moonSize,s_moonDistance,s_moonSpeed,null);
-
+    planet.createMoon();
     pop();
-    
   }
 }
 

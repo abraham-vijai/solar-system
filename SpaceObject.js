@@ -14,6 +14,11 @@ class SpaceObject {
   static starArray = [];
   static planetArray = [];
   
+  static moonSize = 0;
+  static moonPlanetDistance = 0;
+  static moonRotationSpeed = 0;
+  static customTexture = null;
+  
   createSpaceObject() {
     // Disable wireframe
     noStroke();
@@ -35,29 +40,37 @@ class SpaceObject {
 
   }
 
-  createMoon(moonSize, distanceFromPlanet, rotationSpeed, customTexture) {
+  setMoonValues(size, speed, distance, txtr){
+    this.moonSize = size;
+    this.moonRotationSpeed = speed;
+    this.moonPlanetDistance = distance;
+    this.customTexture = txtr;
+  }
+
+  // createMoon(moonSize, distanceFromPlanet, rotationSpeed, customTexture) {
+  createMoon(){
     if (this.hasMoon) {
       // Disable wireframe
       noStroke();
 
       // Add texture or color
-      if(customTexture == null) {
+      if(this.customTexture == null) {
         normalMaterial();
       }
       else{
-        texture(customTexture);
+        texture(this.customTexture);
       }
 
       push();
 
       // Rotate the moon around its parent planet
-      rotate(frameCount * rotationSpeed);
+      rotate(frameCount * this.moonRotationSpeed);
 
       // Translate to moon's position relative to the planet
-      translate(distanceFromPlanet + 5, 0);
+      translate(this.moonPlanetDistance + 5, 0);
 
       // Draw the moon sphere
-      sphere(moonSize, 20, 20);
+      sphere(this.moonSize, 20, 20);
 
       pop();
     }
