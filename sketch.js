@@ -34,22 +34,24 @@ Return value : None
 function draw() {
   background('black');
 
-  let earth = new SpaceObject(10, UI.UI_earthRotationSpeed.value(), SUBDIVISION, earthTexture, UI.UI_earthSunDistance.value(), true, null);
-  let sun = new SpaceObject(SUN_RADIUS, .05, SUBDIVISION, null, 0, false, SUN_COLOR);
+  let earth = new Planet(10, UI.UI_earthRotationSpeed.value(), SUBDIVISION, earthTexture, UI.UI_earthSunDistance.value(), true, null);
+  let sun = new Planet(SUN_RADIUS, .05, SUBDIVISION, null, 0, false, SUN_COLOR);
+  let moon = new Moon(5, UI.UI_moonEarthDistance.value(), UI.UI_moonRotationSpeed.value(), moonTexure);
 
   // Create the starfield
-  SpaceObject.createStarfield();
+  Planet.createStarfield();
 
   // Create the sun
   push();
-  sun.createSpaceObject();
+  sun.createPlanet();
   pop();
 
   // Create the earth and moon
   push();
-  earth.createSpaceObject();
-  earth.setMoonValues(5, UI.UI_moonRotationSpeed.value(), UI.UI_moonEarthDistance.value(), moonTexure);
-  earth.createMoon();
+  earth.createPlanet();
+  moon.createMoon();
+  // earth.setMoonValues(5, UI.UI_moonRotationSpeed.value(), UI.UI_moonEarthDistance.value(), moonTexure);
+  // earth.createMoon();
   pop();
 
   // Display the planets in the array

@@ -22,7 +22,7 @@ class ButtonAction {
     */
     static removeLastPlanet() {
         // Check if array is not empty
-        if (SpaceObject.planetArray.length > 0) {
+        if (Planet.planetArray.length > 0) {
             // Remove the last planet in the array
             SpaceObject.planetArray.pop();
         }
@@ -37,10 +37,10 @@ class ButtonAction {
     */
     static updateStarCount() {
         // Empty the array
-        SpaceObject.starArray = [];
+        Planet.starArray = [];
 
         // Set the star count value
-        SpaceObject.setStarCount(UI.UI_starCount.value());
+        Planet.setStarCount(UI.UI_starCount.value());
     }
 
     /*
