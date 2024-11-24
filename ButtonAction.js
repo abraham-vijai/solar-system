@@ -53,8 +53,10 @@ class ButtonAction {
     static resetSystem() {
         // Empty the array
         planetsArray = [];
+        
+        // Reload the page
+        window.location.reload();
 
-        UI.clearUI();
     }
 
     /*
