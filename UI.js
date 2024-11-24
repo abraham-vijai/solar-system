@@ -14,7 +14,6 @@ class UI {
     constructor(parentElementId = null) {
         // Optionally attach the UI elements to a parent container
         this.parent = parentElementId ? select(`#${parentElementId}`) : null;
-        this.uiElements = [];
     }
 
     // Varibles to store UI elements
