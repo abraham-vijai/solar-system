@@ -172,19 +172,19 @@ class UI {
         yOffset += gap;
         ui.createLabel('Earth Rotation Speed:', xOffset, yOffset);
         yOffset += ySpacing;
-        this.UI_earthRotationSpeed = ui.createSlider(0, .05, .02, .001, xOffset, yOffset);
+        this.UI_earthRotationSpeed = ui.createSlider(0, .1, .02, .001, xOffset, yOffset);
 
         // Moon Distance From Earth
         yOffset += gap;
         ui.createLabel('Moon Distance From Earth:', xOffset, yOffset);
         yOffset += ySpacing;
-        this.UI_moonEarthDistance = ui.createSlider(0, 50, 30, 1, xOffset, yOffset);
+        this.UI_moonEarthDistance = ui.createSlider(0, 100, 30, 1, xOffset, yOffset);
 
         // Moon Rotation Speed
         yOffset += gap;
         ui.createLabel('Moon Rotation Speed:', xOffset, yOffset);
         yOffset += ySpacing;
-        this.UI_moonRotationSpeed = ui.createSlider(0, .05, .02, .001, xOffset, yOffset);
+        this.UI_moonRotationSpeed = ui.createSlider(0, .1, .02, .001, xOffset, yOffset);
 
         // Custom Planet Size:
         yOffset += gap;
@@ -202,7 +202,7 @@ class UI {
         yOffset += gap;
         ui.createLabel('Custom Planet Rotation Speed:', xOffset, yOffset);
         yOffset += ySpacing;
-        this.UI_planetRotationSpeed = ui.createSlider(0, .05, .02, .001, xOffset, yOffset);
+        this.UI_planetRotationSpeed = ui.createSlider(0, .1, .02, .001, xOffset, yOffset);
 
         // Custom Planet Distance From Sun
         yOffset += gap;
@@ -219,13 +219,13 @@ class UI {
         yOffset += gap;
         ui.createLabel('Custom Moon Distance From Planet:', xOffset, yOffset);
         yOffset += ySpacing;
-        this.UI_planetMoonDistance = ui.createSlider(0, 50, 30, 1, xOffset, yOffset);
+        this.UI_planetMoonDistance = ui.createSlider(0, 100, 30, 1, xOffset, yOffset);
 
         // Custom Moon Rotation Speed
         yOffset += gap;
         ui.createLabel('Custom Moon Rotation Speed:', xOffset, yOffset);
         yOffset += ySpacing;
-        this.UI_planetMoonRotationSpeed = ui.createSlider(0, .05, .02, .001, xOffset, yOffset);
+        this.UI_planetMoonRotationSpeed = ui.createSlider(0, .1, .02, .001, xOffset, yOffset);
 
         // Custom Moon Size
         yOffset += gap;
