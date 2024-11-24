@@ -1,3 +1,14 @@
+/*
+Filename    : Planet.js
+Author      : Abraham Vijai
+Date        : 2024-11-24
+Description : This is the Planet.js function. Which handles logic for Planet object
+*/
+
+/*
+Class name   : Planet
+Description  : Represents a planetary object in the simulation. Handles properties such as size, rotation, texture, distance from the sun, and optional moon attributes.
+*/
 class Planet {
     constructor(planetRadius, planetRotationSpeed, planetSubdivision, planetTexture, planetDistance, planetHasMoon = false, planetColor = null) {
         this.radius = planetRadius;
@@ -12,6 +23,12 @@ class Planet {
     static starCount = 100;
     static starArray = [];
 
+    /*
+    Method name  : createPlanet
+    Description  : Renders the planet in the simulation, applying texture or color and managing rotation and positioning.
+    Parameters   : None
+    Return value : None
+    */
     createPlanet() {
         // Disable wireframe
         noStroke();
@@ -35,9 +52,8 @@ class Planet {
     /*
     Method name  : loadSurface
     Description  : Applies texture or color to the space object. Handles lighting and material properties.
-    Parameters   : 
-                - customTexture (p5.Image or null): Texture of the object.
-                - customColor (string or null): Color of the object (hex code).
+    Parameters   : customTexture: Texture of the object.
+                   customColor: Color of the object (hex code).
     Return value : None
     */
     loadSurface(customTexture, customColor) {
@@ -64,8 +80,7 @@ class Planet {
     /*
     Method name  : convertToRgb
     Description  : Converts a hex color to an RGB array.
-    Parameters   : 
-                    - colorToConvert (string): Hex color value.
+    Parameters   : colorToConvert: Hex color value.
     Return value : Array [number, number, number] representing RGB values.
     */
     convertToRgb(colorToConvert) {
@@ -78,8 +93,7 @@ class Planet {
     /*
     Method name  : setStarCount
     Description  : Updates the number of stars in the starfield.
-    Parameters   : 
-                - newStarCount (number): The new number of stars to display.
+    Parameters   :  newStarCount: The new number of stars to display.
     Return value : None
     */
     static setStarCount(newStarCount) {

@@ -1,3 +1,14 @@
+/*
+Filename    : Moon.js
+Author      : Abraham Vijai
+Date        : 2024-11-24
+Description : This is the Moon.js function. Which handles logic for moons.
+*/
+
+/*
+Class name   : Moon
+Description  : Represents a moon object in the simulation. Handles properties such as size, distance from its parent planet, rotation speed, and optional texture.
+*/
 class Moon {
     constructor(moonSize, moonPlanetDistance, moonRotationSpeed, textureMoon) {
         this.radius = moonSize;
