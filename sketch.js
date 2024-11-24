@@ -11,7 +11,6 @@ const STAR_WIDTH = 3;
 const SUBDIVISION = 15;
 
 let earthTexture, moonTexure;
-let planetsArray = [];
 
 /*
 Method name  : setup
@@ -54,7 +53,7 @@ function draw() {
   pop();
 
   // Display the planets in the array
-  for (let pair of planetsArray) {
+  for (let pair of Planet.planetsArray) {
     push();
     let planet = pair[0]; 
     planet.createPlanet();

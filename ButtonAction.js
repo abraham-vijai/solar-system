@@ -22,11 +22,13 @@ class ButtonAction {
     */
     static removeLastPlanet() {
         // Check if array is not empty
-        if (planetsArray.length > 0) {
+        if (Planet.planetsArray.length > 0) {
             // Remove the last planet in the array
-            planetsArray.pop();
+            Planet.planetsArray.pop();
         }
-
+        else{
+            console.log('No planets to remove')
+        }
     }
 
     /*
@@ -38,10 +40,10 @@ class ButtonAction {
     */
     static updateStarCount() {
         // Empty the array
-        starArray = [];
+        Planet.starArray = [];
 
         // Set the star count value
-        setStarCount(UI.UI_starCount.value());
+        Planet.setStarCount(UI.UI_starCount.value());
     }
 
     /*
@@ -52,7 +54,7 @@ class ButtonAction {
     */
     static resetSystem() {
         // Empty the array
-        planetsArray = [];
+        Planet.planetsArray = [];
         
         // Reload the page
         window.location.reload();
@@ -100,9 +102,9 @@ class ButtonAction {
                 UI.UI_planetMoonRotationSpeed.value(),
                 null // texture
             );
-            planetsArray.push([newPlanet, newMoon]); // Add both planet and moon
+            Planet.planetsArray.push([newPlanet, newMoon]); // Add both planet and moon
         } else {
-            planetsArray.push([newPlanet]); // Add just the planet
+            Planet.planetsArray.push([newPlanet]); // Add just the planet
         }
 
     }
