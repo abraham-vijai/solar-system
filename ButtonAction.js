@@ -53,6 +53,8 @@ class ButtonAction {
     static resetSystem() {
         // Empty the array
         planetsArray = [];
+
+        UI.clearUI();
     }
 
     /*

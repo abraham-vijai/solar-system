@@ -2,6 +2,7 @@ class UI {
     constructor(parentElementId = null) {
         // Optionally attach the UI elements to a parent container
         this.parent = parentElementId ? select(`#${parentElementId}`) : null;
+        this.uiElements = [];
     }
 
     // Varibles to store UI elements
@@ -24,6 +25,7 @@ class UI {
         let label = createElement('label', text);
         label.position(x, y);
         if (this.parent) label.parent(this.parent);
+        this.uiElements.push(label)
         return label;
     }
 
@@ -33,6 +35,7 @@ class UI {
         button.position(x, y);
         if (callback) button.mousePressed(callback);
         if (this.parent) button.parent(this.parent);
+        this.uiElements.push(button)
         return button;
     }
 
@@ -43,14 +46,14 @@ class UI {
         if (this.parent) slider.parent(this.parent);
 
         // Create a label for the slider's value
-        let valueLabel = createElement('span', value);
-        valueLabel.position(x + slider.width + 50, y); // Position next to the slider
-        if (this.parent) valueLabel.parent(this.parent);
+        let valueLabel = this.createLabel(value, x + slider.width+50,y);
 
         // Update label as the slider value changes
         slider.input(() => {
             valueLabel.html(slider.value());
         });
+        
+        this.uiElements.push(slider)
 
         return slider;
     }
@@ -60,6 +63,8 @@ class UI {
         let colorPicker = createColorPicker(defaultColor);
         colorPicker.position(x, y);
         if (this.parent) colorPicker.parent(this.parent);
+        this.uiElements.push(colorPicker)
+
         return colorPicker;
     }
 
@@ -77,6 +82,8 @@ class UI {
         let checkbox = createCheckbox(labelText, isChecked);
         checkbox.position(x, y);
         if (this.parent) checkbox.parent(this.parent);
+        this.uiElements.push(checkbox)
+
         return checkbox;
     }
 
@@ -172,4 +179,13 @@ class UI {
         ui.createButton('Reset', 110 + 160 + 130, yOffset, ButtonAction.resetSystem)
     }
 
+    static clearUI() {
+        if (this.uiElements && this.uiElements.length > 0) {
+            for (let element of this.uiElements) {
+                element.remove(); // Remove each element from the DOM
+            }
+            this.uiElements = []; // Reset the array
+        }
+    }
+    
 }
