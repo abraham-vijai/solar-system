@@ -22,10 +22,11 @@ class ButtonAction {
     */
     static removeLastPlanet() {
         // Check if array is not empty
-        if (Planet.planetArray.length > 0) {
+        if (planetsArray.length > 0) {
             // Remove the last planet in the array
-            SpaceObject.planetArray.pop();
+            planetsArray.pop();
         }
+
     }
 
     /*
@@ -37,10 +38,10 @@ class ButtonAction {
     */
     static updateStarCount() {
         // Empty the array
-        Planet.starArray = [];
+        starArray = [];
 
         // Set the star count value
-        Planet.setStarCount(UI.UI_starCount.value());
+        setStarCount(UI.UI_starCount.value());
     }
 
     /*
@@ -51,7 +52,7 @@ class ButtonAction {
     */
     static resetSystem() {
         // Empty the array
-        SpaceObject.planetArray = [];
+        planetsArray = [];
     }
 
     /*
@@ -78,29 +79,27 @@ class ButtonAction {
     Return value : None
     */
     static addPlanet() {
-        let newPlanet;
-
-        // Store the new planet in the array
-        SpaceObject.planetArray.push(
-            newPlanet = new SpaceObject(
-                UI.UI_planetSize.value(),
-                UI.UI_planetRotationSpeed.value(),
-                SUBDIVISION,
-                null,
-                UI.UI_planetSunDistance.value(),
-                UI.UI_planetHasMoon.checked(),
-                UI.UI_planetColor.value()
-            )
+        let newPlanet = new Planet(
+            UI.UI_planetSize.value(),
+            UI.UI_planetRotationSpeed.value(),
+            15, // subdivision
+            null, // texture
+            UI.UI_planetSunDistance.value(),
+            UI.UI_planetHasMoon.checked(),
+            UI.UI_planetColor.value()
         );
-
-        // Set moon values if the planet has a moon
+    
         if (UI.UI_planetHasMoon.checked()) {
-            newPlanet.setMoonValues(
+            let newMoon = new Moon(
                 UI.UI_planetMoonSize.value(),
-                UI.UI_planetMoonRotationSpeed.value(),
                 UI.UI_planetMoonDistance.value(),
-                null
+                UI.UI_planetMoonRotationSpeed.value(),
+                null // texture
             );
+            planetsArray.push([newPlanet, newMoon]); // Add both planet and moon
+        } else {
+            planetsArray.push([newPlanet]); // Add just the planet
         }
+
     }
 }

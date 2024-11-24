@@ -11,6 +11,7 @@ const STAR_WIDTH = 3;
 const SUBDIVISION = 15;
 
 let earthTexture, moonTexure;
+let planetsArray = [];
 
 /*
 Method name  : setup
@@ -50,15 +51,18 @@ function draw() {
   push();
   earth.createPlanet();
   moon.createMoon();
-  // earth.setMoonValues(5, UI.UI_moonRotationSpeed.value(), UI.UI_moonEarthDistance.value(), moonTexure);
-  // earth.createMoon();
   pop();
 
   // Display the planets in the array
-  for (let planet of SpaceObject.planetArray) {
+  for (let pair of planetsArray) {
     push();
-    planet.createSpaceObject();
-    planet.createMoon();
+    let planet = pair[0]; 
+    planet.createPlanet();
+
+    if (pair.length > 1) { 
+      let moon = pair[1];
+      moon.createMoon();
+    }
     pop();
   }
 }

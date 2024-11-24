@@ -11,8 +11,7 @@ class Planet {
 
     static starCount = 100;
     static starArray = [];
-    static planetArray = [];
-    
+
     createPlanet() {
         // Disable wireframe
         noStroke();
